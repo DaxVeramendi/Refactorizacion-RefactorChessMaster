@@ -16,22 +16,33 @@ public class ChessMenuBar
     /**
      * Create a new ChessMenuBar object.
      */
-    public ChessMenuBar(){
+    //Code Smell: LONG METHOD. El método ChessMenuBar() era algo extenso. 
+    //Técnica: EXTRACT METHOD. Se le extrajeron 2 métodos.
+    public ChessMenuBar() {
         String[] menuCategories = { "File", "Options", "Help" };
-        String[] menuItemLists =
-        { "New game/restart,Exit", "Toggle graveyard,Toggle game log",
-          "About" };
-        for ( int i = 0; i < menuCategories.length; i++ ){
-            JMenu currMenu = new JMenu( menuCategories[i] );
-            String[] currMenuItemList = menuItemLists[i].split( "," );
-            for ( int j = 0; j < currMenuItemList.length; j++ ){
-                JMenuItem currItem = new JMenuItem( currMenuItemList[j] );
-                currItem.addActionListener( new MenuListener() );
-                currMenu.add( currItem );
-            }
-            this.add( currMenu );
+        String[] menuItemLists = { "New game/restart,Exit", "Toggle graveyard,Toggle game log", "About" };
+        for (int i = 0; i < menuCategories.length; i++) {
+            JMenu currMenu = createMenu(menuCategories[i], menuItemLists[i]);
+            this.add(currMenu);
         }
     }
+
+    private JMenu createMenu(String category, String itemList) {
+        JMenu menu = new JMenu(category);
+        String[] items = itemList.split(",");
+        for (String item : items) {
+            JMenuItem menuItem = createMenuItem(item);
+            menu.add(menuItem);
+        }
+        return menu;
+    }
+
+    private JMenuItem createMenuItem(String item) {
+        JMenuItem menuItem = new JMenuItem(item);
+        menuItem.addActionListener(new MenuListener());
+        return menuItem;
+    }
+
     /**
      * Listener for the north menu bar.
      *

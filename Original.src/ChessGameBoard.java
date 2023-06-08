@@ -67,44 +67,31 @@ public class ChessGameBoard extends JPanel{
             				"initialized. This square cannot be cleared." );
         }
     }
+    
     // ----------------------------------------------------------
-    /**
-     * Gets all the white game pieces on the board.
-     *
-     * @return ArrayList<GamePiece> the pieces
-     */
-    public ArrayList<ChessGamePiece> getAllWhitePieces(){
-        ArrayList<ChessGamePiece> whitePieces = new ArrayList<ChessGamePiece>();
-        for ( int i = 0; i < 8; i++ ){
-            for ( int j = 0; j < 8; j++ ){
-                if ( chessCells[i][j].getPieceOnSquare() != null
-                    && chessCells[i][j].getPieceOnSquare().getColorOfPiece() ==
-                        ChessGamePiece.WHITE ){
-                    whitePieces.add( chessCells[i][j].getPieceOnSquare() );
+    //Code Smell: LONG METHOD. Los métodos getAllWhitePieces() y getAllBlackPieces() eran muy largos y tenían una estructura parecida. 
+    //Técnica: EXTRACT METHOD. Se extrajo la lógica de obtener piezas en un método separado y reutilizó para ambos métodos.
+    private ArrayList<ChessGamePiece> getAllPiecesByColor(Color color) {
+        ArrayList<ChessGamePiece> pieces = new ArrayList<>();
+        for (int i = 0; i < chessCells.length; i++) {
+            for (int j = 0; j < chessCells[i].length; j++) {
+                ChessGamePiece piece = chessCells[i][j].getPieceOnSquare();
+                if (piece != null && piece.getColorOfPiece() == color) {
+                    pieces.add(piece);
                 }
             }
         }
-        return whitePieces;
+        return pieces;
     }
-    // ----------------------------------------------------------
-    /**
-     * Gets all the black pieces on the board
-     *
-     * @return ArrayList<GamePiece> the pieces
-     */
-    public ArrayList<ChessGamePiece> getAllBlackPieces(){
-        ArrayList<ChessGamePiece> blackPieces = new ArrayList<ChessGamePiece>();
-        for ( int i = 0; i < 8; i++ ){
-            for ( int j = 0; j < 8; j++ ){
-                if ( chessCells[i][j].getPieceOnSquare() != null
-                    && chessCells[i][j].getPieceOnSquare().getColorOfPiece() ==
-                        ChessGamePiece.BLACK ){
-                    blackPieces.add( chessCells[i][j].getPieceOnSquare() );
-                }
-            }
-        }
-        return blackPieces;
+    
+    public ArrayList<ChessGamePiece> getAllWhitePieces() {
+        return getAllPiecesByColor(ChessGamePiece.WHITE);
     }
+    
+    public ArrayList<ChessGamePiece> getAllBlackPieces() {
+        return getAllPiecesByColor(ChessGamePiece.BLACK);
+    }
+    
     // ----------------------------------------------------------
     /**
      * Create a new ChessGameBoard object.
