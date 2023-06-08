@@ -105,6 +105,25 @@ public abstract class ChessGamePiece{
             possibleMoves = calculatePossibleMoves( board );
         }
     }
+    public static ImageIcon getImageIcon(String namePiece,int colorOfPiece){
+        switch(colorOfPiece){
+            case ChessGamePiece.BLACK:
+                return new ImageIcon(
+                    ChessGamePiece.class.getResource("/ChessImages/Black"+namePiece+".gif")
+                );
+                
+            case ChessGamePiece.WHITE:
+                return new ImageIcon(
+                    ChessGamePiece.class.getResource("/ChessImages/White"+namePiece+".gif")
+                );
+                
+            default:
+                return new ImageIcon(
+                    ChessGamePiece.class.getResource("/ChessImages/default-Unassigned.gif")
+                );
+                
+        }
+    }
     // ----------------------------------------------------------
     /**
      * Generates and returns a list of Strings that represent possible move
