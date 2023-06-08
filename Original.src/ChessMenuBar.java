@@ -50,25 +50,26 @@ public class ChessMenuBar
          *            the mouse event from the source
          */
         @Override
-        public void actionPerformed( ActionEvent event ){
-            String buttonName = ( (JMenuItem)event.getSource() ).getText();
-            if ( buttonName.equals( "About" ) ){
+        public void actionPerformed(ActionEvent event) {
+        String buttonName = ((JMenuItem) event.getSource()).getText();
+        switch (buttonName) {
+            case "About":
                 aboutHandler();
-            }
-            else if ( buttonName.equals( "New game/restart" ) ){
+                break;
+            case "New game/restart":
                 restartHandler();
-            }
-            else if ( buttonName.equals( "Toggle game log" ) ){
+                break;
+            case "Toggle game log":
                 toggleGameLogHandler();
-            }
-            else if ( buttonName.equals( "Exit" ) ){
+                break;
+            case "Exit":
                 exitHandler();
-            }
-            else
-            {
+                break;
+            default:
                 toggleGraveyardHandler();
-            }
+                break;
         }
+}
     }
     // ----------------------------------------------------------
     /**
