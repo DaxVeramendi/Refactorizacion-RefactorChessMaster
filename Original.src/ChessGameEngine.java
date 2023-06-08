@@ -82,25 +82,20 @@ public class ChessGameEngine{
      *            the player to check
      * @return boolean true if the player does have legal moves, false otherwise
      */
-    public boolean playerHasLegalMoves( int playerNum ){
-        ArrayList<ChessGamePiece> pieces;
-        if ( playerNum == 1 ){
-            pieces = board.getAllWhitePieces();
-        }
-        else if ( playerNum == 2 ){
-            pieces = board.getAllBlackPieces();
-        }
-        else
-        {
-            return false;
-        }
-        for ( ChessGamePiece currPiece : pieces ){
-            if ( currPiece.hasLegalMoves( board ) ){
-                return true;
-            }
-        }
-        return false;
+  public boolean playerHasLegalMoves(int playerNum) {
+    List<ChessGamePiece> pieces = getPlayerPieces(playerNum);
+    return pieces.stream().anyMatch(piece -> piece.hasLegalMoves(board));
+}
+
+private List<ChessGamePiece> getPlayerPieces(int playerNum) {
+    if (playerNum == 1) {
+        return board.getAllWhitePieces();
+    } else if (playerNum == 2) {
+        return board.getAllBlackPieces();
+    } else {
+        return Collections.emptyList();
     }
+}
     /**
      * Checks if the last-clicked piece is a valid piece (i.e. if it is
      * the correct color and if the user actually clicked ON a piece.)
