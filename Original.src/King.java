@@ -72,22 +72,19 @@ public class King
      * @return ImageIcon the ImageIcon representation of this piece.
      */
     @Override
-    public ImageIcon createImageByPieceType(){
-        if ( getColorOfPiece() == ChessGamePiece.WHITE ){
-            return new ImageIcon(
-                getClass().getResource("chessImages/WhiteKing.gif")
-            );            
-        }
-        else if ( getColorOfPiece() == ChessGamePiece.BLACK ){
-            return new ImageIcon(
-                getClass().getResource("chessImages/BlackKing.gif" )
-            );            
-        }
-        else
-        {
-            return new ImageIcon(
-                getClass().getResource("chessImages/default-Unassigned.gif" )
-            );            
-        }
+    public ImageIcon createImageByPieceType() {
+    String imagePath;
+    switch (getColorOfPiece()) {
+        case ChessGamePiece.WHITE:
+            imagePath = "chessImages/WhiteKing.gif";
+            break;
+        case ChessGamePiece.BLACK:
+            imagePath = "chessImages/BlackKing.gif";
+            break;
+        default:
+            imagePath = "chessImages/default-Unassigned.gif";
+            break;
     }
+    return new ImageIcon(getClass().getResource(imagePath));
+}
 }

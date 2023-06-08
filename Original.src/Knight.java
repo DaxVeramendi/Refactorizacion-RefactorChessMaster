@@ -96,22 +96,15 @@ public class Knight
      * @return ImageIcon the ImageIcon representation of this piece.
      */
     @Override
-    public ImageIcon createImageByPieceType(){
-        if ( getColorOfPiece() == ChessGamePiece.WHITE ){
-            return new ImageIcon(
-                getClass().getResource("chessImages/WhiteKnight.gif")
-            );            
-        }
-        else if ( getColorOfPiece() == ChessGamePiece.BLACK ){
-            return new ImageIcon(
-                getClass().getResource("chessImages/BlackKnight.gif")
-            );            
-        }
-        else
-        {
-            return new ImageIcon(
-                getClass().getResource("chessImages/default-Unassigned.gif")
-            );            
-        }
+    public ImageIcon createImageByPieceType() {
+    String imageGif;
+    if (getColorOfPiece() == ChessGamePiece.WHITE) {
+        imageGif = "WhiteKnight.gif";
+    } else if (getColorOfPiece() == ChessGamePiece.BLACK) {
+        imageGif = "BlackKnight.gif";
+    } else {
+        imageGif = "default-Unassigned.gif";
     }
+    return new ImageIcon(getClass().getResource("chessImages/" + imageGif));
+}
 }
