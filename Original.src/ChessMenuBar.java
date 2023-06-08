@@ -51,15 +51,10 @@ public class ChessMenuBar
      * @author Danielle Bushrow (dbushrow)
      * @version 2010.11.17
      */
-    private class MenuListener
+    /* private class MenuListener
         implements ActionListener
     {
-        /**
-         * Takes an appropriate action based on which menu button is clicked
-         *
-         * @param event
-         *            the mouse event from the source
-         */
+        
         @Override
         public void actionPerformed( ActionEvent event ){
             String buttonName = ( (JMenuItem)event.getSource() ).getText();
@@ -80,7 +75,7 @@ public class ChessMenuBar
                 toggleGraveyardHandler();
             }
         }
-    }
+    } */
     // ----------------------------------------------------------
     /**
      * Takes an appropriate action if the about button is clicked.
