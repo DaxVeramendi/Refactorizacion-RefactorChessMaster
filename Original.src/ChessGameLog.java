@@ -1,50 +1,64 @@
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import java.util.Date;
-
-public class ChessGameLog extends JScrollPane {
+// -------------------------------------------------------------------------
+/**
+ * A scrollable textArea representing the game log. (i.e. moves made by each
+ * player)
+ * 
+ * @author Ben Katz (bakatz)
+ * @author Myles David II (davidmm2)
+ * @author Danielle Bushrow (dbushrow)
+ * @version 2010.11.17
+ */
+public class ChessGameLog
+    extends JScrollPane{
     private JTextArea textArea;
-
-    private static final int TEXT_AREA_ROWS = 5;
-    private static final int TEXT_AREA_COLUMNS = 30;
-
-    public ChessGameLog() {
-        super(new JTextArea("", TEXT_AREA_ROWS, TEXT_AREA_COLUMNS),
-                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-                JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        textArea = ((JTextArea) this.getViewport().getView());
+    // ----------------------------------------------------------
+    /**
+     * Create a new ChessGameLog object.
+     */
+    public ChessGameLog(){
+        super(
+            new JTextArea( "", 5, 30 ),
+            JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+            JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS );
+        textArea = ( (JTextArea)this.getViewport().getView() );
     }
-
-    public void addToLog(String s) {
-        StringBuilder builder = new StringBuilder(textArea.getText());
-
-        if (builder.length() > 0) {
-            builder.append("\n");
+    // ----------------------------------------------------------
+    /**
+     * Adds a new line of text to the log.
+     * 
+     * @param s
+     *            the line of text to add
+     */
+    public void addToLog( String s ){
+        if ( textArea.getText().length() > 0 ){
+            textArea.setText( textArea.getText() + "\n" + new Date() + " - "
+                + s );
         }
-
-        builder.append(new Date()).append(" - ").append(s);
-        textArea.setText(builder.toString());
+        else
+        {
+            textArea.setText( new Date() + " - " + s );
+        }
     }
-
-    public void clearLog() {
-        textArea.setText("");
+    /**
+     * Clears the log.
+     */
+    public void clearLog(){
+        textArea.setText( "" );
     }
-
-    public String getLastLog() {
-        int indexOfLastNewLine = textArea.getText().lastIndexOf("\n");
-        if (indexOfLastNewLine < 0) {
+    // ----------------------------------------------------------
+    /**
+     * Gets the most recent statement added to the log.
+     * 
+     * @return String the most recent log statement
+     */
+    public String getLastLog(){
+        int indexOfLastNewLine = textArea.getText().lastIndexOf( "\n" );
+        if ( indexOfLastNewLine < 0 ){
             return textArea.getText();
         }
-        return textArea.getText().substring(indexOfLastNewLine + 1);
-    }
-
-    // Getter para acceder al contenido del JTextArea
-    public String getText() {
-        return textArea.getText();
-    }
-
-    // Setter para modificar el contenido del JTextArea
-    public void setText(String text) {
-        textArea.setText(text);
+        return textArea.getText().substring( indexOfLastNewLine + 1 );
     }
 }
